@@ -25,13 +25,15 @@ final class APIService {
         let url = Config.baseURL+"/archive-files"
         
         let parameters: [String : Any] = [:]
+        let imageData = imageData.jpegData(compressionQuality: 1)
+        
         AF.upload(multipartFormData: { MultipartFormData in
             //body 추가
             for (key, value) in parameters {
                 MultipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
             }
-            if let image = imageData.pngData() {
-                MultipartFormData.append(image, withName: "file", fileName: "test.png", mimeType: "image/png")
+            if let image = imageData {
+                MultipartFormData.append(image, withName: "file", fileName: "test.jpeg", mimeType: "image/jpeg")
             }
         }, to: url, method: .post, headers: Config.headerMultipart)
         .validate()

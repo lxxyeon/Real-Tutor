@@ -10,14 +10,23 @@ import UIKit
 import SnapKit
 import Then
 
+let userInfo = CoreDataManager.shared.getUserInfo()
                                 
 class MainView: UIView {
 
     // MARK: - 멘토 프로필
     let profileImageView = UIImageView().then {
         //이미지 try catch 처리
-        let image = UIImage(named: "펭수.png");
-        $0.image = image
+        if let thumbnail = UserDefaults.standard.string(forKey: "thumbnail"){
+            if thumbnail.count > 0 {
+                $0.loadwithURLSession(url: URL(string:thumbnail) ?? URL(fileURLWithPath: ""))
+            }else{
+                $0.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+            }
+        }else{
+            $0.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        }
+
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = Constant.profileImgSize/2
         
@@ -33,7 +42,7 @@ class MainView: UIView {
     
     let nameLabel = UILabel().then {
         $0.font = Fonts.EsamanruOTF.bold.font(size: Constant.menuFontSizeXS)
-        let userInfo = CoreDataManager.shared.getUserInfo()
+        
         
         //exception 처리
         if userInfo.count > 0{

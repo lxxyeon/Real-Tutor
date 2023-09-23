@@ -93,9 +93,9 @@ extension CategoryListViewController : UITableViewDelegate, UITableViewDataSourc
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 50))
         
         let imageView = UIImageView()
-        let image = UIImage(systemName: "checkmark.circle")
+        let image = UIImage(systemName: "square.2.layers.3d.bottom.filled")
         imageView.image = image
-        imageView.tintColor = .systemPink
+        imageView.tintColor = .black
         
         let label = UILabel()
         if let categoryList = categoryList{
@@ -103,7 +103,7 @@ extension CategoryListViewController : UITableViewDelegate, UITableViewDataSourc
         }else{
             label.text = "기타"
         }
-        label.textColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 18)
         
         let stackView = UIStackView(arrangedSubviews: [imageView, label])

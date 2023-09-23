@@ -10,6 +10,7 @@ import CoreData
 import Alamofire
 
 // 개인 정보 수정 화면
+// 비밀번호는 확인 용
 class AccountModifyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var Picker = UIImagePickerController()
@@ -17,15 +18,23 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
     
     let userInfo = CoreDataManager.shared.getUserInfo()
     var gender = ""
-    var thumbnail = ""
+    var thumbnail = UserDefaults.standard.string(forKey: "thumbnail") ?? ""
     // 소셜 로그인 시 넘어온 정보
     var myEmail = ""
     var myNickName = ""
+    var selectedImg = UIImage()
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-    @IBOutlet weak var accountImg: UIImageView!
+    @IBOutlet weak var accountImg: UIImageView!{
+        didSet{
+            accountImg.layer.cornerRadius = Constant.profileImgSize/2
+            accountImg.clipsToBounds = true
+            accountImg.contentMode = .scaleAspectFill
+        }
+    }
+    
     @IBOutlet weak var accountImgModifyBtn: UIButton!
     @IBOutlet weak var saveModifiedUserInfoBtn: UIButton!{
         didSet{
@@ -68,7 +77,6 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
                 }
             })
         }
-        
     }
     
     // 회원 탈퇴 버튼
@@ -111,8 +119,14 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
         present(alert,animated: true,completion: nil)
     }
     
+    
+    
+    // MARK: - Button Action
     // 회원 정보 저장 버튼
     @IBAction func saveModifiedUserInfoBtnAction(_ sender: Any) {
+        // 비밀번호 불일치하는 경우 - 재입력 요청
+        
+        //
         let parameter: Parameters = [
             "thumbnail" : self.thumbnail,
             "email": emailTextField.text ?? "",
@@ -121,13 +135,11 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
         ]
         
         if let accesstoken = UserDefaults.standard.string(forKey: "accessToken"){
-            if let profileImg = self.accountImg.image{
-                APIService.shared.fileUpload(imageData: profileImg,
+//            if let profileImg = self.accountImg.image{
+                APIService.shared.fileUpload(imageData: selectedImg,
                                              completion: { url in
-                    // url - 전역변수 저장
-                    CoreDataManager.shared.updateUserInfo(img: url, onSuccess: {_ in
-                    })
-                    
+                    UserDefaults.standard.setValue(url, forKey: "thumbnail")
+                    // 서버 저장
                     APIService.shared.modifyMyAccount(accessToken: accesstoken,
                                                       accountId: UserDefaults.standard.integer(forKey: "accountId"),
                                                       param: parameter,
@@ -150,49 +162,44 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
                     })
                 })
             }
-        }
+//        }
     }
     
     func viewInit() {
         self.gender = self.userInfo[0].gender ?? ""
         var tmpImg = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(#colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1), renderingMode: .alwaysOriginal)
         
-        self.thumbnail = self.userInfo[0].thumbnail ?? ""
+        self.thumbnail = UserDefaults.standard.string(forKey: "thumbnail") ?? ""
         // 소셜 로그인 시 넘어온 정보
         self.myEmail = self.userInfo[0].email ?? ""
         self.myNickName = self.userInfo[0].name ?? ""
         
+        if self.userInfo[0].gender?.lowercased() == "male"{
+            maleBtn.backgroundColor = #colorLiteral(red: 0.4406229556, green: 0.350309521, blue: 0.9307079911, alpha: 1)
+            maleBtn.tintColor = UIColor.white
+            femaleBtn.backgroundColor = UIColor.white
+        }else{
+            maleBtn.backgroundColor = UIColor.white
+            femaleBtn.backgroundColor = #colorLiteral(red: 0.4406229556, green: 0.350309521, blue: 0.9307079911, alpha: 1)
+            femaleBtn.tintColor = UIColor.white
+        }
+        
         emailTextField.text = self.myEmail
         nameTextField.text = self.myNickName
-        
-        maleBtn.backgroundColor = UIColor.white
         maleBtn.layer.borderWidth = 1
         maleBtn.layer.borderColor = Colors.mainPurple.color.cgColor
         maleBtn.layer.cornerRadius = 10
-        
-        femaleBtn.backgroundColor = UIColor.white
         femaleBtn.layer.borderWidth = 1
         femaleBtn.layer.borderColor = Colors.mainPurple.color.cgColor
         femaleBtn.layer.cornerRadius = 10
         
-        accountImg.layer.cornerRadius = accountImg.frame.height/2
-        
-        var userInfo = CoreDataManager.shared.getUserInfo()
-        //https://hanulyun.medium.com/swift-device-%EB%82%B4%EB%B6%80-document%EC%97%90-image-%EC%A0%80%EC%9E%A5-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0-45fcef6b2765
-        
-        //        if let thumbnail = userInfo[0].thumbnail{
-        //            let data = Data(base64Encoded: thumbnail, options: .ignoreUnknownCharacters)
-        //            accountImg.image = UIImage(data: data!)
-        //
-        //        }else{
         if self.thumbnail == "" {
-            accountImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(#colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1), renderingMode: .alwaysOriginal)
+            accountImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         }else{
             //url 처리
-//            accountImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(#colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1), renderingMode: .alwaysOriginal)
+            let url = URL(string: self.thumbnail)!
+            accountImg.loadwithURLSession(url: url)
         }
-
-        //        }
         
         accountImgModifyBtn.layer.cornerRadius = accountImgModifyBtn.frame.height/2
         accountImgModifyBtn.setTitle("", for: .normal)
@@ -203,47 +210,8 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func accountImgModifyAction(_ sender: Any) {
         showActionSheet()
     }
-    
-    //계정 정보 수정 반영
-    @IBAction func saveModifiedUserInfoAction(_ sender: Any) {
-        // uiimage 업로드
-        if let profileImg = self.accountImg.image{
-            APIService.shared.fileUpload(imageData: profileImg,
-                                         completion: { url in
-                // url - 전역변수 저장
-                CoreDataManager.shared.updateUserInfo(img: url, onSuccess: {_ in
-                    
-                })
-            })
-        }
+                                    
 
-        
-        //        let alert = UIAlertController(title:"변경사항 저장 성공",
-        //                                      message: nil,
-        //                                      preferredStyle: UIAlertController.Style.alert)
-        //        //2. 확인 버튼 만들기
-        //        let buttonLabel = UIAlertAction(title: "확인", style: .default, handler: nil)
-        //        //3. 확인 버튼을 경고창에 추가하기
-        //        alert.addAction(buttonLabel)
-        //        //4. 경고창 보이기
-        //        present(alert,animated: true,completion: nil)
-        
-        //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        //        let user = NSEntityDescription.insertNewObject(forEntityName: "UserEntity", into: context) as! UserEntity
-        ////        let png = accountImg.image?.pngData()
-        //        user.thumbnail = self.accountImgURL
-        
-
-        
-        //        do {
-        //            try context.save()
-        //        } catch let error {
-        //            print(error.localizedDescription)
-        //        }
-        //
-    }
-    
-    
     /// 이미지 변경 버튼 클릭시 생성되는 action sheet
     func showActionSheet() {
         
@@ -321,11 +289,25 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //선택한 이미지 처리
             //1. imageView로 보여주기
+            
+            let resizedImage = resizeImage(image: image, newWidth: 300)
+            selectedImg = resizedImage
+            
             DispatchQueue.main.async {
                 self.accountImg.image = image
             }
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width // 새 이미지 확대/축소 비율
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
 

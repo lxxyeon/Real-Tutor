@@ -21,6 +21,7 @@ extension UIViewController {
     
     static func changeRootViewControllerToHome() {
         let vc = MainTabBarViewController.instantiate()
+        
         DispatchQueue.main.async {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                 return

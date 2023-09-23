@@ -16,7 +16,14 @@ class MyPageViewController: UIViewController {
     let userInfo = CoreDataManager.shared.getUserInfo()
     var myMentoAccount: RecommendMentor?
     
-    @IBOutlet weak var myPageImg: UIImageView!
+    @IBOutlet weak var myPageImg: UIImageView!{
+        didSet{
+            myPageImg.layer.cornerRadius = Constant.profileImgSize/2
+            myPageImg.clipsToBounds = true
+            myPageImg.contentMode = .scaleAspectFill
+        }
+    }
+    
     @IBOutlet weak var myPageName: UILabel!
     @IBOutlet weak var myPageEmail: UILabel!
     @IBOutlet weak var myPageNameNim: UILabel!
@@ -91,8 +98,12 @@ class MyPageViewController: UIViewController {
             self.myPageEmail.text = "test@gmail.com"
         }
         
-        if let thumbnail = userInfo[0].thumbnail{
-            self.myPageImg.loadwithURLSession(url: URL(string:thumbnail)!)
+        if let thumbnail = UserDefaults.standard.string(forKey: "thumbnail"){
+            if thumbnail.count > 0 {
+                self.myPageImg.loadwithURLSession(url: URL(string:thumbnail) ?? URL(fileURLWithPath: ""))
+            }else{
+                self.myPageImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+            }
         }else{
             self.myPageImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         }

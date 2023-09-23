@@ -31,14 +31,7 @@ class MainTabBarViewController: UITabBarController, StoryboardInitializable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-
-        // 카테고리 이미지 보여주기 위한 데이터 로드
         var subjectData: [SubjectModel]?
-        
-//        var categories = [Category]()
-        
     }
 
 }
