@@ -39,6 +39,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         }
                     }
                 })
+                
+                DispatchQueue.global().async {
+                    APIService.shared.getDirectListMessage(accessToken: accessToken, completion: { res in
+                        
+                    })
+                }
+                
                 DispatchQueue.main.async {
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                         return

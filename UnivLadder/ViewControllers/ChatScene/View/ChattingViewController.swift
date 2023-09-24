@@ -13,24 +13,17 @@ import UIKit
 class ChattingViewController: UIViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
-    var chattingList: [ChattingRoom]?
+    var chattingList = [ChattingRoom]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "과외 문의"
-        
-        DispatchQueue.global(qos: .utility).async { [weak self] in
-            guard let self = self else { return }
-            if let accessToken = UserDefaults.standard.string(forKey: "accessToken"){
-                APIService.shared.getDirectListMessage(accessToken: accessToken){ res in
-                    if let chattingList = res {
-                        self.chattingList = chattingList
-                    }else{
-                        self.chattingList = nil
-                    }
-                }
-            }
-        }
+        self.chattingList = UserDefaultsManager.chattingRoom ?? []
+        //        self.dataParsing(completion: { res in
+        ////            DispatchQueue.main.async {
+        //                self.chatTableView.reloadData()
+        ////            }
+        //        })
     }
     
     let viewModel = ChatListViewModel()
@@ -45,6 +38,25 @@ class ChattingViewController: UIViewController {
             case createdDate = "accountId3"
             case lastChatMessage = "accountId4"
         }
+    }
+    
+    func dataParsing(completion: (Bool) -> Void) {
+        //        DispatchQueue.global().async {
+        if let accessToken = UserDefaults.standard.string(forKey: "accessToken"){
+            APIService.shared.getDirectListMessage(accessToken: accessToken){ res in
+                if let chattingList = res {
+                    self.chattingList = chattingList
+                    //                        completion(true)
+                    //
+                }else{
+                    self.chattingList = []
+                    //                        completion(true)
+                }
+                
+            }
+        }
+        completion(true)
+        //        }
     }
     
     //    func bindViewModel() {
@@ -79,7 +91,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
                 APIService.shared.getDirectListMessage(accessToken: accessToken){ res in
                     guard let chatList = res else { return }
                     self.chattingList = chatList
-                    if let chat = self.chattingList?[indexPath.item] {
+                    let chat = self.chattingList[indexPath.item]
                         DispatchQueue.main.async {
                             if let cell = self.chatTableView.cellForRow(at: indexPath) as? ChatRoomListCell{
                                 // 대화방 타이틀 무조건 상대 이름
@@ -95,9 +107,9 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
                                 cell.timeLabel.text = chat.lastModifiedDate.toDate()?.toString()
                                 cell.messageCountLabel.text = "1"
                             }
-                            self.chatTableView.reloadData()
+                            //                            self.chatTableView.reloadData()
                         }
-                    }
+                    
                 }
             }
         }
@@ -105,7 +117,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.chattingList?.count ?? 0
+        return self.chattingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,16 +133,17 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // senderid > 내 계정 아이디가 아닌 accountid로
-//        let accountId = (chattingList[indexPath.row].sender.id == UserDefaults.standard.integer(forKey: "accountId")) ? chattingList[indexPath.row].receiver.id : chattingList[indexPath.row].sender.id
-//        let userName = (chattingList[indexPath.row].sender.id == UserDefaults.standard.integer(forKey: "accountId")) ? self.chattingList[indexPath.row].receiver.name : chattingList[indexPath.row].sender.name
-//
-//        APIService.shared.getDirectMessages(myaccessToken: UserDefaults.standard.string(forKey: "accessToken")!, senderAccountId: accountId, completion: { res in
-//            guard let ChatRoomVC = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as? ChatRoomViewController
-//            else { return }
-//            ChatRoomVC.allChatting = res
-//            ChatRoomVC.userName = userName
-//            ChatRoomVC.userAccount = accountId
-//            self.navigationController?.pushViewController(ChatRoomVC, animated: true)
-//        })
+        
+        let accountId = (chattingList[indexPath.row].sender.id == UserDefaults.standard.integer(forKey: "accountId")) ? chattingList[indexPath.row].receiver.id : chattingList[indexPath.row].sender.id
+        let userName = (chattingList[indexPath.row].sender.id == UserDefaults.standard.integer(forKey: "accountId")) ? self.chattingList[indexPath.row].receiver.name : chattingList[indexPath.row].sender.name
+        
+        APIService.shared.getDirectMessages(myaccessToken: UserDefaults.standard.string(forKey: "accessToken")!, senderAccountId: accountId, completion: { res in
+            guard let ChatRoomVC = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as? ChatRoomViewController
+            else { return }
+            ChatRoomVC.allChatting = res
+            ChatRoomVC.userName = userName
+            ChatRoomVC.userAccount = accountId
+            self.navigationController?.pushViewController(ChatRoomVC, animated: true)
+        })
     }
 }
