@@ -41,6 +41,9 @@ class MentoRegisterViewController: UIViewController {
         super.viewDidLoad()
         categoryCollectionView.allowsMultipleSelection = true
         UserDefaultsManager.selectedSubject = []
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

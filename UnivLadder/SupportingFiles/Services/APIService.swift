@@ -275,6 +275,7 @@ final class APIService {
                     jsonDict = try JSONSerialization.jsonObject(with: (dataString?.data(using: .utf8))!, options: []) as! [String:Any]
                     
                     CoreDataManager.shared.deleteAllUsers()
+                    
                     CoreDataManager.shared
                         .saveUserEntity(accountId: jsonDict["id"] as! Int,
                                         email: jsonDict["email"] as? String ?? "",
@@ -288,6 +289,10 @@ final class APIService {
                             print("⭐️내 계정 coredata 저장 성공⭐️")
                             //                            UIViewController.changeRootViewControllerToHome()
                         })
+                    //userdefault 초기화
+                    UserDefaults.standard.set(jsonDict["thumbnail"] as? String, forKey: "thumbnail")
+                    UserDefaults.standard.set(jsonDict["name"] as? String, forKey: "name")
+                    UserDefaults.standard.setValue(jsonDict["id"], forKey: "accountId")
                     
                     if let mentee = jsonDict["mentee"]{
                         if (mentee as! Bool) == false {
@@ -295,8 +300,7 @@ final class APIService {
                         }
                     }
                     
-                    UserDefaults.standard.set(jsonDict["name"] as? String, forKey: "name")
-                    UserDefaults.standard.setValue(jsonDict["id"], forKey: "accountId")
+
                     completion(jsonDict["id"] as! Int)
                 } catch {
                     print(error.localizedDescription)
@@ -380,7 +384,11 @@ final class APIService {
     // 회원가입 - 서버 자체 회원가입 요청 API
     func signUp(param: Parameters,
                 completion: @escaping () -> Void){
-        AF.request(Config.baseURL+"/sign-up", method: .post, parameters: param, encoding: JSONEncoding.default).responseString { response in
+        AF.request(Config.baseURL+"/sign-up", 
+                   method: .post,
+                   parameters: param,
+                   encoding: JSONEncoding.default)
+        .responseString { response in
             switch response.result{
                 //200인 경우 성공
             case .success(let data):
@@ -515,14 +523,13 @@ final class APIService {
     func registerMento(accessToken: String,
                        param: Parameters,
                        completion: @escaping (Bool) -> Void){
-        let headers: HTTPHeaders = ["Accept" : "application/json",
-                                    "Content-Type" : "application/json",
-                                    "Authentication" : "Bearer " + accessToken]
+        headers.add(name: "Authentication", value: "Bearer " + accessToken)
         AF.request(Config.baseURL+"/mentors",
                    method: .post,
                    parameters: param,
                    encoding: JSONEncoding.default,
-                   headers: headers).responseString { response in
+                   headers: headers)
+        .responseString { response in
             switch response.result{
             case .success(_):
                 print("⭐️멘토 등록 성공⭐️")
@@ -901,7 +908,9 @@ final class APIService {
                         UserDefaultsManager.recommendMentorList = []
                         for mentor in jsonArray{
                             let mentoDict = mentor["account"] as! Dictionary<String, Any>
+                            let inputThumbnail = mentoDict["thumbnail"] ?? ""
                             let mentoAccount = RecommendMentor.Account(id: mentoDict["id"] as! Int,
+                                                                       thumbnail: inputThumbnail as! String,
                                                                        name: mentoDict["name"] as! String)
                             
                             var mentoSubjectArr = [RecommendMentor.Subject]()

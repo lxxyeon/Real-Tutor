@@ -151,18 +151,24 @@ extension MentoListViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MentoListCell.mentoRegisterId, for: indexPath) as? MentoListCell else {
                 return UICollectionViewCell()
             }
-            
             cell.label.text = mentoList[indexPath.row].account.name
-            
-            
             if let mentoImg = mentoList[indexPath.row].account.thumbnail {
-                customImage = UIImage(named: (mentoImg as? String)!)
+                let url = URL(string: mentoImg)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { [self] in
+                        self.customImage = UIImage(data: data!)
+                        cell.tvImageView.image = customImage
+                    }
+                }
             }else{
                 customImage = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.systemGray2, renderingMode: .alwaysOriginal)
+                cell.tvImageView.image = customImage
             }
 
-            cell.tvImageView.image = customImage
+            cell.tvImageView.layer.cornerRadius = Constant.profileImgSize/2
             cell.tvImageView.clipsToBounds = true
+            cell.tvImageView.contentMode = .scaleAspectFill
             
             return cell
         }

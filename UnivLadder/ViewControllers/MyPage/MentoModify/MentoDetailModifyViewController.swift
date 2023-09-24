@@ -108,12 +108,21 @@ class MentoDetailModifyViewController: UIViewController, UITextViewDelegate {
         }else{
             // 멘토 등록 안 되어 있는 경우 멘토 등록 API
             if let description = detailTextView.text, let accesstoken = UserDefaults.standard.string(forKey: "accessToken") {
-            
+//                var descriptionString = String()
+//                do {
+//                    descriptionString = try String(contentsOfFile: description, encoding: .utf8)
+//                }
+//                catch let error as NSError {
+//                    print("catch :: ", error.localizedDescription)
+//                    return
+//                }
+                let extracurricularSubjectCodes: [Int]? = Array(UserDefaultsManager.selectedSubject ?? [])
+                
                 let parameter: Parameters = [
                     "minPrice" : Int(sliderView.value[0]),
                     "maxPrice" : Int(sliderView.value[1]),
                     "description" : description,
-                    "extracurricularSubjectCodes" : UserDefaultsManager.selectedSubject ?? []]
+                    "extracurricularSubjectCodes" : extracurricularSubjectCodes ?? []]
                 
                 APIService.shared.registerMento(accessToken: accesstoken, param: parameter, completion: {res in
                     if res {

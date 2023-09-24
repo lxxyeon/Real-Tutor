@@ -21,19 +21,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+        
         //isAutoLogin
-        //자동로그인이 설정되어 있는 경우 홈화면으로 시작
-        if UserDefaults.standard.bool(forKey:"isAutoLogin") == true {
-            let vc = MainTabBarViewController.instantiate()
-            DispatchQueue.main.async {
-                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-                    return
+        if let accessToken = UserDefaults.standard.string(forKey: "accessToken"){
+            //자동로그인이 설정되어 있는 경우 홈화면으로 시작
+            if UserDefaults.standard.bool(forKey:"isAutoLogin") == true {
+                let vc = MainTabBarViewController.instantiate()
+                APIService.shared.getMyAccount(accessToken: accessToken, completion: { accountId in
+                    UserDefaults.standard.setValue(accountId, forKey: "accountId")
+                    // 메인화면 이동
+                    if accountId > 0 {
+                        UIViewController.changeRootViewControllerToHome()
+                        // FCM 토큰 저장
+                        if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken") {
+                            APIService.shared.putFCMToken(fcmToken: fcmToken, accessToken: accessToken, accountId: accountId)
+                            print("accountId = \(accountId)")
+                        }
+                    }
+                })
+                DispatchQueue.main.async {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                        return
+                    }
+                    windowScene.windows.first?.rootViewController = vc
+                    windowScene.windows.first?.makeKeyAndVisible()
                 }
-                windowScene.windows.first?.rootViewController = vc
-                windowScene.windows.first?.makeKeyAndVisible()
             }
         }
+       
+
 
         //시작 화면 바꿔가면서 테스트
 //        guard let _ = (scene as? UIWindowScene) else { return }

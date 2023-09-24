@@ -87,6 +87,8 @@ class MyPageViewController: UIViewController {
                     UserDefaults.standard.setValue(myMentoAccount?.mentoId, forKey: "MyMentoId")
                 })
             }
+        }else{
+            UserDefaults.standard.setValue(0, forKey: "MyMentoId")
         }
         
         if userInfo.count > 0{

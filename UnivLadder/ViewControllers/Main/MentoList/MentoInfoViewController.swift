@@ -85,7 +85,16 @@ class MentoInfoViewController: UIViewController {
     @IBOutlet weak var mentoImg: UIImageView!{
         didSet{
             if let img = mentoInfo?.account.thumbnail{
-                mentoImg.image = UIImage(named: img)
+                let url = URL(string: img)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async { [self] in
+                        mentoImg.image = UIImage(data: data!)
+                    }
+                }
+                mentoImg.layer.cornerRadius = Constant.profileImgSize/2
+                mentoImg.clipsToBounds = true
+                mentoImg.contentMode = .scaleAspectFill
             }else{
                 mentoImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray)
             }
@@ -226,9 +235,9 @@ class MentoInfoViewController: UIViewController {
         for i in mentoSubjectList {
             tagStringArray.append(i.value)
         }
-    
+        
         tagButtonArray = tagStringArray.map { createButton(with: $0) }
- 
+        
         // 태그뷰에 태그버튼들 붙이기
         let frame = CGRect(x: 0, y: 0, width: tagListView.frame.width, height: tagListView.frame.height)
         let tagView = UIView(frame: frame)
@@ -289,7 +298,7 @@ class MentoInfoViewController: UIViewController {
         let margins: CGFloat = (lineCount - 1) * marginY
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (lineCount * height) + margins)
     }
-
+    
     func setUpUI() {
         mentoChatBtn.layer.cornerRadius = 10
         mentoChatBtn.tintColor = UIColor.white

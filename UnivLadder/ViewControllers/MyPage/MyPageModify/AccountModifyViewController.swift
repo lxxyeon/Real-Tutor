@@ -126,19 +126,19 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func saveModifiedUserInfoBtnAction(_ sender: Any) {
         // 비밀번호 불일치하는 경우 - 재입력 요청
         
-        //
-        let parameter: Parameters = [
-            "thumbnail" : self.thumbnail,
-            "email": emailTextField.text ?? "",
-            "name" : nameTextField.text ?? "",
-            "gender" : self.gender,
-        ]
         
         if let accesstoken = UserDefaults.standard.string(forKey: "accessToken"){
 //            if let profileImg = self.accountImg.image{
                 APIService.shared.fileUpload(imageData: selectedImg,
                                              completion: { url in
                     UserDefaults.standard.setValue(url, forKey: "thumbnail")
+                    //
+                    let parameter: Parameters = [
+                        "thumbnail" : url,
+                        "email": self.emailTextField.text ?? "",
+                        "name" : self.nameTextField.text ?? "",
+                        "gender" : self.gender,
+                    ]
                     // 서버 저장
                     APIService.shared.modifyMyAccount(accessToken: accesstoken,
                                                       accountId: UserDefaults.standard.integer(forKey: "accountId"),
