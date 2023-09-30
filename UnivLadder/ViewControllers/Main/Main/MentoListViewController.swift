@@ -153,12 +153,13 @@ extension MentoListViewController: UICollectionViewDelegate, UICollectionViewDat
             }
             cell.label.text = mentoList[indexPath.row].account.name
             if let mentoImg = mentoList[indexPath.row].account.thumbnail {
-                let url = URL(string: mentoImg)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async { [self] in
-                        self.customImage = UIImage(data: data!)
-                        cell.tvImageView.image = customImage
+                if let url = URL(string: mentoImg){
+                    DispatchQueue.global().async {
+                        let data = try? Data(contentsOf: url)
+                        DispatchQueue.main.async { [self] in
+                            self.customImage = UIImage(data: data!)
+                            cell.tvImageView.image = customImage
+                        }
                     }
                 }
             }else{
