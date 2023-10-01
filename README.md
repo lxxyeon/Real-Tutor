@@ -14,46 +14,49 @@
   
 ## Library  
 * Alamofire  
-  + HTTP 통신 처리  
 * SwiftyJSON
-  + JSON 파싱
 * Firebase, GoogleSignIn
-  + 소셜로그인
 * Kingfisher
-  + 이미지 캐싱처리
+* Cosmos
 
 ## Foldering
 ```
 .
-├─ Resource
-|   ├── CategoryName.swift
-|   ├── PostData.swift
+├─ ViewController
+|   ├── Main
+|   ├── Account
+|   ├── Category
+|   ├── Chatting
+|   ├── MyPage
+|   ├── Cell
 |   |
-├─ First (record tab)
-|   ├── MainPage.storyboard
-|   ├── MainpageViewController.swift
-|   ├── DetailViewController.storyboard
-|   ├── DetailViewController.swift
-|   ├── InformHelper.swift
-|   ├── PostHelper.swift
+├─ Model
+|   ├── User.swift
+|   ├── Mentor.swift
+|   ├── Config.swift
+|   ├── Chat
+|   |   ├── Chat.swift
+|   |   └── ChattingRoom.swift
+|   ├── Subject
+|   |   ├── Subject.swift
+|   |   └── Category.swift
 |   |
-├─ Second (create tab)
-|   ├── Record.storyboard
-|   ├── RecordViewController.swift
-|   ├── UserInformation.swift
+├─ DB
+|   ├── UserModel.xcdatamodeld
+|   ├── CoreDataManager.swift
 |   |
-├─ Third (calendar tab)
-|   ├── Third.storyboard
-|   ├── CalendarVC.swift
-|   ├── CabinetCVC.xib
+├─ Util
+|   ├── Managers
+|   ├── Extension
+|   ├── Protocol
 |   ├── CabinetCVC.swift
 |   |
-├─ Fourth (my page tab)
-|   ├── MyPage.storyboard
-|   ├── MyPageViewController.swift
-|   ├── UserData.swift
-|   ├── UserHelper.swift
-|   └── CategoryHelper.swift
+├─ SupportingFile
+|   ├── Resource
+|   |   ├── Chat.swift
+|   |   └── Chat.swift
+|   ├── Service
+|   └── Localizable.strings
 
 
 ```
