@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iKF-cV-Kkq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iKF-cV-Kkq">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -286,19 +286,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="회원가입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yw2-Hy-e6a">
-                                <rect key="frame" x="40" y="80" width="129" height="41"/>
+                                <rect key="frame" x="39.999999999999993" y="80" width="121.33333333333331" height="41"/>
                                 <fontDescription key="fontDescription" name="esamanruOTFMedium" family="esamanru OTF" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 계정을 만들어요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5y-VF-Edk">
-                                <rect key="frame" x="40" y="131" width="156.66666666666666" height="15"/>
+                                <rect key="frame" x="40" y="131" width="142.33333333333334" height="17.666666666666657"/>
                                 <fontDescription key="fontDescription" name="GmarketSansMedium" family="Gmarket Sans" pointSize="15"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-DC-WKP">
-                                <rect key="frame" x="40" y="176" width="295" height="358"/>
+                                <rect key="frame" x="40" y="178.66666666666663" width="295" height="358"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="성명" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" disabledBackground="emailIcon" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-fh-Vlf">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -346,7 +346,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잘못된 형식의 이메일입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NN-q2-TLs">
-                                                <rect key="frame" x="0.0" y="54" width="295" height="20"/>
+                                                <rect key="frame" x="0.0" y="54.000000000000028" width="295" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="u0Z-Uf-ZSE"/>
                                                 </constraints>
@@ -357,7 +357,7 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Eo-ZZ-i8X" userLabel="AuthView">
-                                        <rect key="frame" x="0.0" y="154" width="295" height="50"/>
+                                        <rect key="frame" x="0.0" y="154.00000000000003" width="295" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="인증번호" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" disabledBackground="emailIcon" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3hR-3A-Fws">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -425,7 +425,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sbR-zW-5Ze">
-                                <rect key="frame" x="40" y="554" width="295" height="50"/>
+                                <rect key="frame" x="40" y="556.66666666666663" width="295" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xhe-0t-gM5">
                                         <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="50"/>
@@ -460,7 +460,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwx-yw-fVb">
-                                <rect key="frame" x="40" y="624" width="295" height="50"/>
+                                <rect key="frame" x="40" y="626.66666666666663" width="295" height="50"/>
                                 <color key="backgroundColor" red="0.41429898139999999" green="0.35561686749999999" blue="0.87063390019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6Mf-Ud-XSd"/>
@@ -474,16 +474,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WzI-97-Bko">
-                                <rect key="frame" x="40" y="694" width="295" height="29"/>
+                                <rect key="frame" x="40" y="696.66666666666663" width="295" height="31.666666666666629"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="이미 계정이 있어요!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFJ-mM-7t2">
-                                        <rect key="frame" x="0.0" y="7" width="167" height="15"/>
+                                        <rect key="frame" x="0.0" y="7" width="167" height="17.666666666666668"/>
                                         <fontDescription key="fontDescription" name="GmarketSansMedium" family="Gmarket Sans" pointSize="15"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ju3-Ky-WIx">
-                                        <rect key="frame" x="175" y="0.0" width="120" height="29"/>
+                                        <rect key="frame" x="175" y="0.0" width="120" height="31.666666666666668"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="Aa1-iO-TAx"/>
                                         </constraints>
@@ -554,8 +554,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-7L-TJ6">
                                 <rect key="frame" x="40" y="99.999999999999986" width="295" height="61.333333333333329"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="비밀번호를 재설정해요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ5-Ct-vII">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="36.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="비밀번호 재설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ5-Ct-vII">
+                                        <rect key="frame" x="0.0" y="0.0" width="207.66666666666666" height="36.333333333333336"/>
                                         <fontDescription key="fontDescription" name="esamanruOTFMedium" family="esamanru OTF" pointSize="31"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -758,7 +758,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

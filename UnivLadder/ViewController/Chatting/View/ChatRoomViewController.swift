@@ -223,20 +223,22 @@ class ChatRoomViewController: UIViewController, UITextViewDelegate {
         let msg = ["accountId" : userAccount ?? 0,
                    "message" : textView.text,
                    "type" : "TEXT"] as [String : Any]
-        if let token = UserDefaults.standard.string(forKey: "accessToken"){
-            APIService.shared.sendDirectMessage(accessToken: token, param: msg, completion: { res in
-                if res == true {
-                    APIService.shared.getDirectMessages(myaccessToken: token, senderAccountId: msg["accountId"] as! Int, completion: { res in
-                        self.allChatting = res
-                        self.textView.text = ""
-                        self.chatBubbleTableView.reloadData()
-                        let moveIndex = IndexPath(row: self.allChatting.count-1, section: 0)
-                        self.chatBubbleTableView.scrollToRow(at: moveIndex, at: .bottom, animated: false)
-                    })
-                }
-            })
-        }
+        if !textView.text.isEmpty && textView.text.count != 0{
+            if let token = UserDefaults.standard.string(forKey: "accessToken"){
+                APIService.shared.sendDirectMessage(accessToken: token, param: msg, completion: { res in
+                    if res == true {
+                        APIService.shared.getDirectMessages(myaccessToken: token, senderAccountId: msg["accountId"] as! Int, completion: { res in
+                            self.allChatting = res
+                            self.textView.text = ""
+                            self.chatBubbleTableView.reloadData()
+                            let moveIndex = IndexPath(row: self.allChatting.count-1, section: 0)
+                            self.chatBubbleTableView.scrollToRow(at: moveIndex, at: .bottom, animated: false)
+                        })
+                    }
+                })
+            }
 
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

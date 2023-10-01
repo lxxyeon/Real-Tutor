@@ -227,6 +227,10 @@ class MentoInfoViewController: UIViewController {
         initTagView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setUpUI()
+    }
+    
     /// 태그뷰 초기화
     private func initTagView() {
         // 태그버튼들 생성

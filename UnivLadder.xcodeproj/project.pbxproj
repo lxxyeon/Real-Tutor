@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6801F4C72AC9C7620089190D /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6801F4C62AC9C7620089190D /* Accounts.storyboard */; };
 		680452EE27F07F1E00F24A25 /* PageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680452ED27F07F1E00F24A25 /* PageCollectionViewCell.swift */; };
 		6815DB37297A735D00E6B356 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815DB36297A735D00E6B356 /* KeyChain.swift */; };
 		6819DD9E2802D9B400C7FF54 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6819DD9D2802D9B400C7FF54 /* UserDefaultManager.swift */; };
@@ -51,7 +52,6 @@
 		68C42AF227D4C4C300CE9E38 /* MentoRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C42AF127D4C4C300CE9E38 /* MentoRegisterViewController.swift */; };
 		68C42AF427D4C50400CE9E38 /* ProfileModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C42AF327D4C50400CE9E38 /* ProfileModifyViewController.swift */; };
 		68C42AF927D4CEF600CE9E38 /* SubjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C42AF827D4CEF600CE9E38 /* SubjectCollectionViewCell.swift */; };
-		68CE951C296933DD00482764 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CE951B296933DD00482764 /* Accounts.storyboard */; };
 		68CE951E296933E400482764 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CE951D296933E400482764 /* MyPage.storyboard */; };
 		68D099472A7F977D00BD31B8 /* AppInfoPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D099462A7F977D00BD31B8 /* AppInfoPrivateViewController.swift */; };
 		68D099492A7F9FD600BD31B8 /* realtutorInfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 68D099482A7F9FD600BD31B8 /* realtutorInfo.txt */; };
@@ -149,6 +149,7 @@
 /* Begin PBXFileReference section */
 		2B28EB398542A5F4D4C81C62 /* Pods-UnivLadderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivLadderTests.debug.xcconfig"; path = "Target Support Files/Pods-UnivLadderTests/Pods-UnivLadderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5CFFC54965A55F46842E3502 /* Pods-UnivLadder-UnivLadderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivLadder-UnivLadderUITests.release.xcconfig"; path = "Target Support Files/Pods-UnivLadder-UnivLadderUITests/Pods-UnivLadder-UnivLadderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6801F4C62AC9C7620089190D /* Accounts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Accounts.storyboard; path = UnivLadder/ViewController/Storyboards/Accounts.storyboard; sourceTree = SOURCE_ROOT; };
 		680452ED27F07F1E00F24A25 /* PageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCollectionViewCell.swift; sourceTree = "<group>"; };
 		6815DB36297A735D00E6B356 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		6819DD9D2802D9B400C7FF54 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -193,7 +194,6 @@
 		68C42AF127D4C4C300CE9E38 /* MentoRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoRegisterViewController.swift; sourceTree = "<group>"; };
 		68C42AF327D4C50400CE9E38 /* ProfileModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyViewController.swift; sourceTree = "<group>"; };
 		68C42AF827D4CEF600CE9E38 /* SubjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectCollectionViewCell.swift; sourceTree = "<group>"; };
-		68CE951B296933DD00482764 /* Accounts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Accounts.storyboard; path = UnivLadder/ViewControllers/Storyboards/Accounts.storyboard; sourceTree = SOURCE_ROOT; };
 		68CE951D296933E400482764 /* MyPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MyPage.storyboard; path = UnivLadder/MyPage/MyPage.storyboard; sourceTree = SOURCE_ROOT; };
 		68D099462A7F977D00BD31B8 /* AppInfoPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoPrivateViewController.swift; sourceTree = "<group>"; };
 		68D099482A7F9FD600BD31B8 /* realtutorInfo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = realtutorInfo.txt; path = Resource/realtutorInfo.txt; sourceTree = SOURCE_ROOT; };
@@ -367,7 +367,7 @@
 			path = Accounts;
 			sourceTree = "<group>";
 		};
-		68442AED27730E2F009DF75A /* Models */ = {
+		68442AED27730E2F009DF75A /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				E546934527F9C73A007A1791 /* Chat */,
@@ -381,7 +381,7 @@
 				68B27C89279D610C0064D1DD /* LoginDataModel.swift */,
 				689C759C27AFD80E00C04978 /* DummyData.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6856B50A2A4845D500BE135E /* MentoModify */ = {
@@ -577,14 +577,14 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		E57A31BA27B902DA00276D7F /* Utils */ = {
+		E57A31BA27B902DA00276D7F /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				E5F3F91B264709A600763ADB /* Managers */,
+				E5F3F91B264709A600763ADB /* Manager */,
 				E5F3F91D264709B300763ADB /* Extensions */,
 				E57A31BB27B902E200276D7F /* Protocol */,
 			);
-			path = Utils;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		E57A31BB27B902E200276D7F /* Protocol */ = {
@@ -611,7 +611,7 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		E58D4B61275DF3D2009CF08D /* MentoList */ = {
+		E58D4B61275DF3D2009CF08D /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				68F26FAB293C99390059D700 /* MentoSubjectTableViewCell.swift */,
@@ -622,7 +622,7 @@
 				6879ACB828BB73A300E758A4 /* MentoListCell.swift */,
 				688E6C8F2A2392E500E21E81 /* CategoryCell.swift */,
 			);
-			path = MentoList;
+			path = Category;
 			sourceTree = "<group>";
 		};
 		E5AF9A40280C2CFB00601AE2 /* Common */ = {
@@ -659,11 +659,10 @@
 			isa = PBXGroup;
 			children = (
 				E5F3F9192647097800763ADB /* Storyboards */,
-				E5F3F91A2647098200763ADB /* ViewControllers */,
-				E5B6CECF269A9562005D0501 /* Cells */,
+				E5F3F91A2647098200763ADB /* ViewController */,
 				6836D2D6281546E400048E21 /* DB */,
-				68442AED27730E2F009DF75A /* Models */,
-				E57A31BA27B902DA00276D7F /* Utils */,
+				68442AED27730E2F009DF75A /* Model */,
+				E57A31BA27B902DA00276D7F /* Util */,
 				E5F3F9182647093B00763ADB /* SupportingFiles */,
 				68F06FA927782576008A9511 /* UnivLadder.entitlements */,
 			);
@@ -731,35 +730,36 @@
 				E5B38B272615EBCC00D4EB5D /* Main.storyboard */,
 				68CE951D296933E400482764 /* MyPage.storyboard */,
 				E5F3F95126470FFC00763ADB /* MentoList.storyboard */,
+				6801F4C62AC9C7620089190D /* Accounts.storyboard */,
 				E5B38B2F2615EBCC00D4EB5D /* LaunchScreen.storyboard */,
-				68CE951B296933DD00482764 /* Accounts.storyboard */,
 				6892DB15296ADA5F002DB446 /* Chatting.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		E5F3F91A2647098200763ADB /* ViewControllers */ = {
+		E5F3F91A2647098200763ADB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				68CE952329693B6900482764 /* Main */,
-				E5AF9A40280C2CFB00601AE2 /* Common */,
 				68442AE827730E21009DF75A /* Accounts */,
-				E58D4B61275DF3D2009CF08D /* MentoList */,
+				E5B6CECF269A9562005D0501 /* Cells */,
+				E5AF9A40280C2CFB00601AE2 /* Common */,
+				E58D4B61275DF3D2009CF08D /* Category */,
 				E587B06F2712F53B00FAD77D /* MyPage */,
-				E5F3F9702647105400763ADB /* ChatScene */,
+				E5F3F9702647105400763ADB /* Chatting */,
 				E5F3F9712647108100763ADB /* MainTabBarViewController.swift */,
 			);
-			path = ViewControllers;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
-		E5F3F91B264709A600763ADB /* Managers */ = {
+		E5F3F91B264709A600763ADB /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				E58D4B5F275DF339009CF08D /* ThemeManager.swift */,
 				E5576B04275E27DC002BF041 /* ConstantManager.swift */,
 				68EBBE702A288AF4005F674A /* UserDefaultsManager.swift */,
 			);
-			path = Managers;
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		E5F3F91D264709B300763ADB /* Extensions */ = {
@@ -776,13 +776,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		E5F3F9702647105400763ADB /* ChatScene */ = {
+		E5F3F9702647105400763ADB /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
 				E546934027F9BE42007A1791 /* View */,
 				E546933F27F9BDAF007A1791 /* ViewModel */,
 			);
-			path = ChatScene;
+			path = Chatting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -902,10 +902,10 @@
 			files = (
 				E5FA9B9E27DDEA5B009C9C9E /* Colors.xcassets in Resources */,
 				E58A9C2027DE0A6700A4ACBB /* Images.xcassets in Resources */,
+				6801F4C72AC9C7620089190D /* Accounts.storyboard in Resources */,
 				E5FDFBEB264E7857000269F9 /* esamanru OTF Bold.otf in Resources */,
 				E5FDFBEC264E7857000269F9 /* esamanru OTF Light.otf in Resources */,
 				6892DB16296ADA5F002DB446 /* Chatting.storyboard in Resources */,
-				68CE951C296933DD00482764 /* Accounts.storyboard in Resources */,
 				68CE951E296933E400482764 /* MyPage.storyboard in Resources */,
 				E5FDFBED264E7857000269F9 /* esamanru OTF Medium.otf in Resources */,
 				E5FDFBEE264E7857000269F9 /* GmarketSansBold.otf in Resources */,

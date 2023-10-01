@@ -92,23 +92,23 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
                     guard let chatList = res else { return }
                     self.chattingList = chatList
                     let chat = self.chattingList[indexPath.item]
-                        DispatchQueue.main.async {
-                            if let cell = self.chatTableView.cellForRow(at: indexPath) as? ChatRoomListCell{
-                                // 대화방 타이틀 무조건 상대 이름
-                                // senderAccountId 보낸 사람이 나이면 > rereceiver name 가져오면 된당
-                                if (chat.senderAccountId == UserDefaults.standard.integer(forKey: "accountId")){
-                                    // senderAccountId 보낸 사람이 나이면
-                                    cell.nameLabel.text = chat.receiver.name
-                                }else{
-                                    // 내가 아니면 senderAccountId 로 계정 조회 해서 이름 가져와야대
-                                    cell.nameLabel.text = chat.sender.name
-                                }
-                                cell.lastMessageLabel.text = chat.message
-                                cell.timeLabel.text = chat.lastModifiedDate.toDate()?.toString()
-                                cell.messageCountLabel.text = "1"
+                    DispatchQueue.main.async {
+                        if let cell = self.chatTableView.cellForRow(at: indexPath) as? ChatRoomListCell{
+                            // 대화방 타이틀 무조건 상대 이름
+                            // senderAccountId 보낸 사람이 나이면 > rereceiver name 가져오면 된당
+                            if (chat.senderAccountId == UserDefaults.standard.integer(forKey: "accountId")){
+                                // senderAccountId 보낸 사람이 나이면
+                                cell.nameLabel.text = chat.receiver.name
+                            }else{
+                                // 내가 아니면 senderAccountId 로 계정 조회 해서 이름 가져와야대
+                                cell.nameLabel.text = chat.sender.name
                             }
-                            //                            self.chatTableView.reloadData()
+                            cell.lastMessageLabel.text = chat.message
+                            cell.timeLabel.text = chat.lastModifiedDate.toDate()?.toString()
+                            cell.messageCountLabel.text = "1"
                         }
+                        //                            self.chatTableView.reloadData()
+                    }
                     
                 }
             }
@@ -121,13 +121,24 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        getDirectMessageList(at: indexPath)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomCell", for: indexPath) as? ChatRoomListCell else {
-            return UITableViewCell()
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomCell", for: indexPath) as? ChatRoomListCell else { return UITableViewCell()
         }
-        
-        
+        let chat = self.chattingList[indexPath.item]
+
+        // 대화방 타이틀 무조건 상대 이름
+        // senderAccountId 보낸 사람이 나이면 > rereceiver name 가져오면 된당
+        if (chat.senderAccountId == UserDefaults.standard.integer(forKey: "accountId")){
+            // senderAccountId 보낸 사람이 나이면
+            cell.nameLabel.text = chat.receiver.name
+        }else{
+            // 내가 아니면 senderAccountId 로 계정 조회 해서 이름 가져와야대
+            cell.nameLabel.text = chat.sender.name
+        }
+        cell.lastMessageLabel.text = chat.message
+        cell.timeLabel.text = chat.lastModifiedDate.toDate()?.toString()
+        cell.messageCountLabel.text = "1"
+
         return cell
     }
     

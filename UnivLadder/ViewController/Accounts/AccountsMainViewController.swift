@@ -256,6 +256,10 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                     }
                 }
             }
+        }else{
+            // 카카오톡 미설치인 경우 - 카카오톡 계정 로그인 웹화면으로 이동
+            let kakaoUrl = URL(string: "https://accounts.kakao.com")
+            UIApplication.shared.open(kakaoUrl!, options: [:], completionHandler: nil)
         }
     }
     

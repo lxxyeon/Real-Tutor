@@ -36,7 +36,7 @@ class ResetPasswordVC: UIViewController {
     }
     
     func settingUI() {
-        titleLabel.text = "비밀번호를 재설정해요!"
+        titleLabel.text = "비밀번호 재설정"
         subTitlelabel.lineBreakMode = .byWordWrapping
         subTitlelabel.numberOfLines = 0
         subTitlelabel.text = "비밀번호 재설정을 위해 입력한 이메일로 인증번호가 전송됩니다. \n가입한 이메일 주소를 입력해 주세요!"

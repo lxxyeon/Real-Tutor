@@ -583,9 +583,18 @@ final class APIService {
                         if let jsonDict = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
                             if let mentoDict = self.optionalAnyToDictionary(jsonDict["account"]){
                                 let mentoAccount = RecommendMentor.Account(id: mentoDict["id"] as! Int,
+                                                                           thumbnail: mentoDict["thumbnail"] as! String,
                                                                            name: mentoDict["name"] as! String)
                                 let mentoData = RecommendMentor(mentoId: jsonDict["id"] as! Int,
-                                                                account: mentoAccount)
+                                                                account: mentoAccount,
+                                                                mentoringCount: jsonDict["mentoringCount"] as? Int,
+                                                                minPrice: jsonDict["minPrice"] as? Int,
+                                                                maxPrice: jsonDict["maxPrice"] as? Int,
+                                                                description: jsonDict["description"] as? String,
+                                                                reviewCount: jsonDict["reviewCount"] as? Int,
+                                                                totalReviewScore: jsonDict["totalReviewScore"] as? Double,
+                                                                averageReviewScore: jsonDict["averageReviewScore"] as? Double,
+                                                                listOfExtracurricularSubjectData: jsonDict["listOfExtracurricularSubjectData"] as? [RecommendMentor.Subject])
                                 completion(mentoData)
                             }
                         }

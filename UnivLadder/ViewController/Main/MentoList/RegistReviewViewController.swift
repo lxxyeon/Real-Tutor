@@ -58,6 +58,7 @@ class RegistReviewViewController: UIViewController {
                     alert = UIAlertController(title:"⭐️리뷰 성공⭐️",
                                                   message: "리뷰를 등록 완료했습니다",
                                                   preferredStyle: UIAlertController.Style.alert)
+                    
 
                 }else{
                     alert = UIAlertController(title:"👿리뷰 등록 실패👿",
@@ -65,6 +66,13 @@ class RegistReviewViewController: UIViewController {
                                                   preferredStyle: UIAlertController.Style.alert)
                 }
                 let buttonLabel = UIAlertAction(title: "확인", style: .default, handler: {_ in
+                    if let accessToken = UserDefaults.standard.string(forKey: "accessToken") {
+                        APIService.shared.getMentorInfo(accessToken: accessToken, mentoId: mentoId, completion: { res in
+                            guard let MentoListVC = self.storyboard?.instantiateViewController(withIdentifier: "MentoInfoViewController") as?  MentoInfoViewController else { return }
+                            MentoListVC.mentoInfo = res
+                        })
+                    }
+                    self.navigationController?.popViewController(animated: true)
                     self.dismiss(animated:true, completion: nil)
                 })
                 alert.addAction(buttonLabel)

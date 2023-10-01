@@ -15,8 +15,8 @@ class NoticeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        announceDateLabel.text = "2023-06-06"
-        noticeContentLabel.text = "iOS & iPadOS 17 Beta Release Notes"
+        announceDateLabel.text = "2023-10-01"
+        noticeContentLabel.text = "17.1 Beta 1 Release Notes"
         // Initialization code
     }
 

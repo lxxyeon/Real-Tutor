@@ -9,7 +9,7 @@ import UIKit
 
 class MyPageViewController: UIViewController {
     @IBOutlet weak var userStatusToggleBtn: UIButton!
-
+    
     var mentoRegistStatus : Bool = false
     
     // core data에서 user 정보 가져옴
@@ -38,7 +38,7 @@ class MyPageViewController: UIViewController {
     
     //마이페이지 목록
     @IBOutlet weak var MyPageTableView: UITableView!
-    var cellTitle = ["알림", "공지사항", "[Real Tutor] 안내", "로그아웃"]
+    var cellTitle = ["알림", "[Real Tutor] 안내", "로그아웃"]
     var cellIcon = ["bell", "mic", "questionmark.circle", "rectangle.portrait.and.arrow.right"]
     
     @IBAction func MoveToRegister(_ sender: Any) {
@@ -82,7 +82,7 @@ class MyPageViewController: UIViewController {
                     let score = UserDefaults.standard.integer(forKey: "ChatCount")
                     self.employeeLabel.text = "\(score)"
                     
-                 
+                    
                     //멘토 아이디 전역 변수 저장
                     UserDefaults.standard.setValue(myMentoAccount?.mentoId, forKey: "MyMentoId")
                 })
@@ -109,13 +109,13 @@ class MyPageViewController: UIViewController {
         }else{
             self.myPageImg.image = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         }
-            
-
+        
+        
         self.userStatusToggleBtn.setTitleColor(UIColor.black, for: .normal)
         self.userStatusToggleBtn.layer.borderWidth = 1
         self.userStatusToggleBtn.layer.borderColor = UIColor.black.cgColor
         self.userStatusToggleBtn.layer.cornerRadius = 5
-      
+        
         //멘토 등록 상태인지 확인
         if mentoRegistStatus{
             // 멘토 등록된 경우
@@ -133,7 +133,7 @@ class MyPageViewController: UIViewController {
     func userStatusViewSetting() {
         self.profileModifyBtn.layer.cornerRadius = 10
     }
-
+    
     /// 멘토 등록 action
     /// - Parameter sender: 상태 변경
     @IBAction func userStatusChangeBtn(_ sender: Any) {
@@ -192,9 +192,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     // 마이페이지 테이블 뷰
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         MyPageTableView.deselectRow(at: indexPath, animated: true)
-
+        
         switch indexPath.row {
-        // 알림 -> 환경 설정 알림 이동
+            // 알림 -> 환경 설정 알림 이동
         case 0:
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 if #available(iOS 10.0, *) {
@@ -203,17 +203,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                     UIApplication.shared.openURL(url)
                 }
             }
-        // 공지사항
+            // 공지사항 - 임시 삭제
+//        case 1:
+//            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Announcement"){
+//                self.navigationController?.pushViewController(controller, animated: true)
+//            }
+            // [앱 이름] 안내
         case 1:
-            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Announcement"){
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-        // [앱 이름] 안내
-        case 2:
             if let controller = self.storyboard?.instantiateViewController(withIdentifier: "AppInfo"){
                 self.navigationController?.pushViewController(controller, animated: true)
             }
-        // 로그 아웃
+            // 로그 아웃
         default:
             var alert = UIAlertController()
             alert = UIAlertController(title:"로그아웃 하시겠습니까?",
@@ -232,11 +232,19 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    //로그아웃 수행
     func signOut() {
-        UIViewController.changeRootViewControllerToLogin()
         CoreDataManager.shared.deleteAllUsers()
+        //userdefault값 all reset
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+        UIViewController.changeRootViewControllerToLogin()
     }
 }
+
 extension UIImageView {
     func loadwithURLSession(url: URL){
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
