@@ -28,8 +28,8 @@
 |   ├── Category
 |   ├── Chatting
 |   ├── MyPage
-|   ├── Cell
-|   |
+|   └── Cell
+|   
 ├─ Model
 |   ├── User.swift
 |   ├── Mentor.swift
@@ -37,26 +37,25 @@
 |   ├── Chat
 |   |   ├── Chat.swift
 |   |   └── ChattingRoom.swift
-|   ├── Subject
-|   |   ├── Subject.swift
-|   |   └── Category.swift
-|   |
+|   └── Subject
+|       ├── Subject.swift
+|       └── Category.swift
+|   
 ├─ DB
 |   ├── UserModel.xcdatamodeld
-|   ├── CoreDataManager.swift
-|   |
+|   └── CoreDataManager.swift
+|   
 ├─ Util
 |   ├── Managers
 |   ├── Extension
-|   ├── Protocol
-|   ├── CabinetCVC.swift
-|   |
-├─ SupportingFile
-|   ├── Resource
-|   |   ├── Chat.swift
-|   |   └── Chat.swift
-|   ├── Service
-|   └── Localizable.strings
+|   └── Protocol
+|   
+└── SupportingFile
+    ├── Resource
+    |   ├── Font
+    |   └── Img
+    ├── Service
+    └── Localizable.strings
 
 
 ```
