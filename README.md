@@ -2,7 +2,8 @@
 특정 분야의 전문가인 멘토와 그 분야에 전문가가 되고 싶은 멘티를 연결해주는 비대면 커넥션 서비스
 
 ## Contact
-- iOS : lxxyeon@gmail.com
+- iOS Develpor : lxxyeon@gmail.com
+- Server Develpor : univ.ladder14@gmail.com
 
 ## Feature  
 - 자체 회원가입, 로그인 및 소셜 로그인(카카오톡, 구글, 애플)
@@ -21,7 +22,7 @@
 * Kingfisher
   + 이미지 캐싱처리
 
-## Structure
+## Foldering
 ```
 .
 ├─ Resource
@@ -60,5 +61,6 @@
 ## Vesion
 - 1.0 배포
 
-## Privacy Policy of RealTutor
-https://leeyeonlog.tistory.com/4
+## Site
+- API Document : http://3.39.17.117/docs/index.html
+- Privacy Policy of RealTutor : https://leeyeonlog.tistory.com/4
