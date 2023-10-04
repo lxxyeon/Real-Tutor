@@ -34,8 +34,17 @@ class AccountsRegisterViewController: UIViewController {
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
     //성별
-    @IBOutlet weak var maleBtn: UIButton!
-    @IBOutlet weak var femaleBtn: UIButton!
+    @IBOutlet weak var maleBtn: UIButton!{
+        didSet{
+            maleBtn.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var femaleBtn: UIButton!{
+        didSet{
+            femaleBtn.isHidden = true
+        }
+    }
     
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
@@ -264,7 +273,7 @@ class AccountsRegisterViewController: UIViewController {
                         "password" : password2,
                         "name" : name,
                         "thumbnail" : "",
-                        "gender" : User.gender
+                        "gender" : "MAN"
                     ]
 
                     APIService.shared.signUp(param: registerUserParam, completion: {

@@ -11,6 +11,7 @@ import GoogleSignIn
 import KakaoSDKUser
 import Firebase
 import Alamofire
+import SafariServices
 
 // 로그인 화면
 class AccountsMainViewController: UIViewController, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate, UITextFieldDelegate, StoryboardInitializable {
@@ -258,8 +259,11 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
             }
         }else{
             // 카카오톡 미설치인 경우 - 카카오톡 계정 로그인 웹화면으로 이동
-            let kakaoUrl = URL(string: "https://accounts.kakao.com")
-            UIApplication.shared.open(kakaoUrl!, options: [:], completionHandler: nil)
+            // (웹화면 사파리 기본 내장으로 수정)
+            let kakaoUrl = URL(string: "https://accounts.kakao.com")!
+            let vc = SFSafariViewController(url: kakaoUrl)
+            present(vc, animated: true)
+//            UIApplication.shared.open(kakaoUrl!, options: [:], completionHandler: nil)
         }
     }
     

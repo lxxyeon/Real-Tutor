@@ -57,13 +57,21 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
         self.gender = "WOMAN"
     }
     
-    @IBOutlet weak var maleBtn: UIButton!
-    @IBOutlet weak var femaleBtn: UIButton!
+    @IBOutlet weak var maleBtn: UIButton!{
+        didSet{
+            maleBtn.isHidden = true
+        }
+    }
+    @IBOutlet weak var femaleBtn: UIButton!{
+        didSet{
+            femaleBtn.isHidden = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewInit()
-        
+        hideKeyboardWhenTappedAround()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.container = appDelegate.persistentContainer
         
@@ -137,7 +145,7 @@ class AccountModifyViewController: UIViewController, UIImagePickerControllerDele
                         "thumbnail" : url,
                         "email": self.emailTextField.text ?? "",
                         "name" : self.nameTextField.text ?? "",
-                        "gender" : self.gender,
+                        "gender" : "MAN",
                     ]
                     // 서버 저장
                     APIService.shared.modifyMyAccount(accessToken: accesstoken,

@@ -34,13 +34,15 @@ class MentoListViewController: UIViewController {
         let parameter: Parameters = [
             "fcmToken" : UserDefaults.standard.string(forKey: "fcmToken") ?? ""
         ]
-        
-        // 카테고리(topic)
-        let subjects = UserDefaultsManager.subjectList
         var tmpArr: [String] = []
-        for i in 0..<subjects!.count{
-            tmpArr.append(subjects.map{$0[i].topic}!)
+        // 카테고리(topic)
+        if let subjects = UserDefaultsManager.subjectList{
+            for i in 0..<subjects.count{
+                tmpArr.append(subjects[i].topic)
+            }
         }
+       
+        
         categoryArr = NSOrderedSet(array: tmpArr).map({ $0 as! String })
         UserDefaultsManager.categoryList = categoryArr
         
