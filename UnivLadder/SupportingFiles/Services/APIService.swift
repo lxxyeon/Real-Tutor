@@ -312,7 +312,6 @@ final class APIService {
     }
     
     fileprivate func saveNewUser(accountId: Int, email: String, gender: String, name: String, password: String, thumbnail: String?, mentee: Bool, mentor: Bool) {
-        
         CoreDataManager.shared
             .saveUserEntity(accountId: accountId, email: email, gender: gender, name: name, password: password, thumbnail: thumbnail, mentee: mentee, mentor: mentor, onSuccess: { onSuccess in
                 print("saved = \(onSuccess)")
@@ -457,17 +456,18 @@ final class APIService {
                    parameters: param,
                    encoding: JSONEncoding.default).responseString { response in
             switch response.result{
-            case .success(let data):
-                if let jsonData = data.data(using: .utf8) {
-                    do {
-                        if let jsonDict = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                            UserDefaults.standard.setValue(jsonDict["accessToken"] as! String, forKey: "accessToken")
-                            print("accessToken = \(jsonDict["accessToken"] as! String))")
-                            completion(jsonDict["accessToken"] as! String)
+            case .success(_):
+                do{
+                    let dataString = String(data: response.data!, encoding: .utf8)
+                    if let jsonData = dataString!.data(using: .utf8) {
+                        if let jsonData = dataString!.data(using: .utf8) {
+                            if let jsonDict = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+                                let code = jsonDict["code"]
+                            }
                         }
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
                     }
+                }catch {
+                    print(error.localizedDescription)
                 }
             default:
                 print("👿소셜 로그인 실패👿")
@@ -1016,9 +1016,9 @@ final class APIService {
                 } catch {
                     print(error.localizedDescription)
                 }
-                print("⭐️추천 멘토 데이터 조회 성공⭐️")
+                print("⭐️공지사항 조회 성공⭐️")
             default:
-                print("👿추천 멘토 조회 실패👿")
+                print("👿공지사항 조회 실패👿")
             }
         }
     }

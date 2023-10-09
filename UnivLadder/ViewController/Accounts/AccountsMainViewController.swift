@@ -63,6 +63,7 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
         self.serverLogIn(email: email, password: password)
         //        }
     }
+
     
     /// 로그인 입력 데이터 형식 체크 메소드
     /// - Parameters:
@@ -108,6 +109,27 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
         return res
     }
     
+    /// 로그인 성공 시 수행 메소드
+    /// - Parameters:
+    ///   - accessToken: accessToken description
+    func successLogIn(accessToken: String){
+        // 자동 로그인 설정 값 저장
+        if self.isAutoLogin == true {
+            UserDefaults.standard.setValue(true, forKey: "isAutoLogin")
+        }else{
+            UserDefaults.standard.setValue(false, forKey: "isAutoLogin")
+        }
+        
+        // 추천 멘토 정보 불러옴
+        APIService.shared.getRecommendMentors(accessToken: accessToken)
+        
+        // 유저의 채팅 리스트 불러오기
+        DispatchQueue.global().async {
+            APIService.shared.getDirectListMessage(accessToken: accessToken, completion: { res in
+                
+            })
+        }
+    }
     
     func serverLogIn(email: String, password: String) {
         //실 data
@@ -116,7 +138,9 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
         
         APIService.shared.signIn(param: params, completion: {
             if let accessToken = UserDefaults.standard.string(forKey: "accessToken") {
+                self.successLogIn(accessToken: accessToken)
                 
+                /*
                 // 자동 로그인 설정 값 저장
                 if self.isAutoLogin == true {
                     UserDefaults.standard.setValue(true, forKey: "isAutoLogin")
@@ -141,7 +165,7 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                     })
                 }
 
-                
+                 */
                 // 내 계정 조회
                 APIService.shared.getMyAccount(accessToken: accessToken, completion: { accountId in
                     UserDefaults.standard.setValue(accountId, forKey: "accountId")
@@ -155,6 +179,7 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                         }
                     }
                 })
+                 
             }else{
                 let alert = UIAlertController(title:"👿로그인 실패👿",
                                               message: "로그인 정보를 확인하세요.",
@@ -237,16 +262,10 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                                                                       accountId: UserDefaults.standard.integer(forKey: "accountId"),
                                                                       param: parameter,
                                                                       completion: { res in
-                                        CoreDataManager.shared.deleteAllUsers()
-                                        self.saveNewUser(accountId,
-                                                         email: myEmail,
-                                                         gender: "",
-                                                         name: myNickName,
-                                                         password: "",
-                                                         thumbnail: "",
-                                                         mentee: true,
-                                                         mentor: false
-                                        )
+                                        self.successLogIn(accessToken: restoken)
+                                        UIViewController.changeRootViewControllerToHome()
+                                        UserDefaults.standard.set(myEmail as? String, forKey: "email")
+                                        UserDefaults.standard.set(myNickName as? String, forKey: "name")
                                     })
                                 })
                             })
@@ -318,24 +337,18 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                     UserDefaults.standard.setValue(accountId, forKey: "accountId")
                     // 이름, 이메일 저장
                     let parameter: Parameters = [
-                        "email": email ?? "",
-                        "name" : nickName ?? "",
+                        "email": email,
+                        "name" : nickName,
                     ]
                     
                     APIService.shared.modifyMyAccount(accessToken: restoken,
                                                       accountId: UserDefaults.standard.integer(forKey: "accountId"),
                                                       param: parameter,
                                                       completion: { res in
-                        CoreDataManager.shared.deleteAllUsers()
-                        self.saveNewUser(accountId,
-                                         email: email,
-                                         gender: "",
-                                         name: nickName,
-                                         password: "",
-                                         thumbnail: "",
-                                         mentee: true,
-                                         mentor: false
-                        )
+                        self.successLogIn(accessToken: restoken)
+                        UIViewController.changeRootViewControllerToHome()
+                        UserDefaults.standard.set(email, forKey: "email")
+                        UserDefaults.standard.set(nickName, forKey: "name")
                     })
                 })
             })
@@ -398,16 +411,10 @@ class AccountsMainViewController: UIViewController, ASAuthorizationControllerPre
                                                       accountId: UserDefaults.standard.integer(forKey: "accountId"),
                                                       param: parameter,
                                                       completion: { res in
-                        CoreDataManager.shared.deleteAllUsers()
-                        self.saveNewUser(accountId,
-                                         email: "\(email ?? "")",
-                                         gender: "",
-                                         name: "\((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))",
-                                         password: "",
-                                         thumbnail: "",
-                                         mentee: true,
-                                         mentor: false
-                        )
+                        self.successLogIn(accessToken: accessToken)
+                        UIViewController.changeRootViewControllerToHome()
+                        UserDefaults.standard.set("\(email ?? "")", forKey: "email")
+                        UserDefaults.standard.set("\((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))", forKey: "name")
                     })
                 })
             })

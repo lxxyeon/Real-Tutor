@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var handled: Bool
-        
+        // 인증 리디렉션 URL
         handled = GIDSignIn.sharedInstance.handle(url)
         if handled {
             return true
