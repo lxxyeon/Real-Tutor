@@ -4,7 +4,8 @@
 
 ## Contact
 - iOS Develpor : lxxyeon@gmail.com
-- Server Develpor : univ.ladder14@gmail.com
+- Android Developer : https://github.com/ChaMinZi
+- Server Develpor : [jaeyeonling@gmail.com](https://github.com/jaeyeonling)
 
 ## Feature  
 - 자체 회원가입, 로그인 및 소셜 로그인(카카오톡, 구글, 애플)
